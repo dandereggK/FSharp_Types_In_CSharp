@@ -1,4 +1,4 @@
-﻿namespace Example
+﻿namespace Example.Models
 
 //1. Records
 
@@ -52,6 +52,20 @@ type SparrowSpecies =
   | WhiteThroated
   | House
 
-(*2.1 A basic discrimated union defintion. 
-A value of this type can be one and only one of the type members at a time.*)
+(*2.1 A basic discrimated union definition. 
+The names seperated by the | are called cases. 
+A value of this type can be one and only one of the cases at a time.*)
 
+type Shape =
+  | Point
+  | Circle of float
+  | Rentengle of length : float * width : float
+
+(* 2.2 A complex discrimated union definition. 
+The circle case has an unamed value representing radius
+The point case has no values
+The Rentengle case has a tuple ( * operator) of named members.
+Note: that we would gernerally avoid defintions like the Retangle case 
+and instead define a rectangle record type and put that inplace of the tuple.
+Note: that float in fsharp is 64bit making it equvilant to a C# Double
+*)
