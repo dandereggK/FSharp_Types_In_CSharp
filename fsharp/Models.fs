@@ -1,4 +1,5 @@
 ﻿namespace Example.Models
+//place types into a namespace, don't use module yet.
 
 //1. Records
 
@@ -69,3 +70,52 @@ Note: that we would gernerally avoid defintions like the Retangle case
 and instead define a rectangle record type and put that inplace of the tuple.
 Note: that float in fsharp is 64bit making it equvilant to a C# Double
 *)
+
+
+//3. Tuples
+
+type Rectangle = float * float
+
+(*3.1 This is type abrivation useful for shortening lengthly type abrivations or putting a business name to a more generic type.
+However, they only work with F# and don't show up in C#.
+In this case Rectangle is equvilent to Tuple<float,float>.*)
+
+type DrawBox<'t> =
+  {
+    Position : float * float * float
+    Shape : 't
+  }
+
+(*3.2 First use of generics. All generic identifiers are prefixed with ' in F#.
+The Position member of the record is a tuple with three members. *)
+
+type DrawRectangle = DrawBox<Rectangle>
+
+(*3.3 Another use of type abrivation.*)
+
+//4. Option Type
+
+(* The option type is an FSharp.Core type defined like so.
+type Option<'t> =
+| Some of 't
+| None
+This is used whenever the existantance of a value is in question depricating the entire concept of nulls.
+*)
+
+type PollResult =
+    { Yes: int option
+      No: option<int> }
+
+(*4.1 Note types with only one generic can be rewritten postfix style. Both Yes and No types are equvilent.*)
+
+
+//5. Collection Types: Array, Map, List, Set
+
+type MegaType =
+  { Arrays : int []
+    Maps : Map<string,int>
+    Sets : Set<int>
+    Lists : int option list //list<option<int>>
+    ArrayofArrays : int [] []
+    Array2d : int [,]
+  }
